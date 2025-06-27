@@ -1,0 +1,85 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+
+# Logs
+logs/
+*.log
+
+# dotenv
+.env
+.env.*
+
+# Database scripts que no quieras subir
+*.sql~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+
+# Dist folders
+/dist
+/build
+
+# Frontend dependencies
+client/node_modules/
+/client/dist/
+
+# Backend dependencies
+server/node_modules/
+
+# Optional cache folders
+.cache/
+.clientcache/
+
+# documentación LaTeX
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.run.xml
+*.bcf
+*.pdf
+
+# Latex editor files (Overleaf, TeXstudio, etc.)
+*.nav
+*.snm
+*.vrb
+
+# Dependencias y builds
+.yarn/
+.yarnrc
+.pnp.*
+.next/         # Next.js
+.cache/        # Gatsby, Parcel, etc.
+.serverless/   # Serverless Framework
+.eslintcache
+.parcel-cache/
+.turbo/
+dist-*/        # Carpetas de build alternativas (ej. dist-esm/, dist-cjs/)
+*.tsbuildinfo  # TypeScript incremental builds
+
+# Configuraciones de frameworks
+.next/
+.nuxt/         # Nuxt.js
+.vuepress/     # VuePress
+.svelte-kit/   # SvelteKit
