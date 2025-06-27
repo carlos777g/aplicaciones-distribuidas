@@ -1,0 +1,7 @@
+## 📬 Postman
+
+La colección de rutas para probar el backend está en:
+`postman/rutas-backend.postman_collection.json`
+
+Puedes importarla en Postman con:
+- File > Import > selecciona el archivo JSON.
