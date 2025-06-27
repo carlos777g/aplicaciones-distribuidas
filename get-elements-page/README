@@ -1,0 +1,7 @@
+La página de web scrapping para sacar el valor de 3 modenas cada 50 segundos y guardarlas en la base de mongodb.
+Además agregué la parte de gráficar cada moneda, las rutas correspondientes para eso son:
+http://localhost:3001/grafica/usd
+http://localhost:3001/grafica/gbp
+http://localhost:3001/grafica/aud
+
+Adicionalmente, esta la ruta http://localhost:3001/precios para retornar en json la entrada más reciente de precios de las tres monedas
