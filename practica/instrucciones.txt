@@ -1,0 +1,18 @@
+Capacidades
+1. Crear proyectos en Atlas MongoDB
+2. Configurar las IPs con acceso
+3. Probar la conexión a MondoDB
+4. Consultas a MongoDB
+5. Crear una BD, crear una colección
+6. Intertar datos a una colección
+7. Eliminar Documentos
+
+**Práctica**
+1. Crear un WS para consultar las primeras 10 películas (3 campos)
+
+/practica/retrieve/movies
+get 
+
+en WS () => {
+    connect -> Make array -> conv.JSON
+}
