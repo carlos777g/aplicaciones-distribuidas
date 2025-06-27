@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gráfica <%= moneda %></title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h2>Gráfica del valor de <%= moneda %></h2>
+  <canvas id="grafica" width="600" height="300"></canvas>
+
+  <script>
+    const labels = <%- labels %>;
+    const valores = <%- valores %>;
+
+    const ctx = document.getElementById('grafica').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Valor en pesos',
+          data: valores,
+          borderColor: 'blue',
+          fill: false
+        }]
+      }
+    });
+  </script>
+</body>
+</html>

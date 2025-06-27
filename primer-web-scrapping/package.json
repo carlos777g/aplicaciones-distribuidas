@@ -1,5 +1,5 @@
 {
-  "name": "get-elements-page",
+  "name": "primer-web-scrapping",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
@@ -11,11 +11,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "axios": "^1.9.0",
-    "body-parser": "^2.2.0",
-    "ejs": "^3.1.10",
-    "express": "^5.1.0",
-    "mongodb": "^6.17.0",
-    "nodemon": "^3.1.10"
+    "axios": "^1.10.0",
+    "express": "^5.1.0"
   }
 }
