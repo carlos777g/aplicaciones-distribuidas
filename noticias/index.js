@@ -55,16 +55,6 @@ async function obtenerContenidoNoticia(link) {
   const h1Close = html.indexOf("</h1>", h1Open);
   const titulo = html.slice(h1Open, h1Close).trim();
 
-  // Resumen (clase "lead")
-  const resumenMarker = '<div class="lead">';
-  const resumenStart = html.indexOf(resumenMarker);
-  let resumen = "";
-  if (resumenStart !== -1) {
-    const pOpen = html.indexOf(">", resumenStart) + 1;
-    const pClose = html.indexOf("</div>", pOpen);
-    resumen = html.slice(pOpen, pClose).trim();
-  }
-
   // Imagen (dentro de <meta property="og:image"...>)
   const ogImageMarker = '<meta property="og:image" content="';
   const ogImgStart = html.indexOf(ogImageMarker);
@@ -74,31 +64,60 @@ async function obtenerContenidoNoticia(link) {
     const imgUrlEnd = html.indexOf('"', imgUrlStart);
     imagen = html.slice(imgUrlStart, imgUrlEnd);
   }
-
-  // Cuerpo (puede tener varios párrafos)
-  const cuerpo = [];
-  let cuerpoPos = html.indexOf('<div class="field--name-body"');
-  if (cuerpoPos !== -1) {
-    const bodyEnd = html.indexOf("</div>", cuerpoPos);
-    const bodyHtml = html.slice(cuerpoPos, bodyEnd);
-    let pIndex = 0;
-    while (true) {
-      const pStart = bodyHtml.indexOf("<p>", pIndex);
-      const pEnd = bodyHtml.indexOf("</p>", pStart);
-      if (pStart === -1 || pEnd === -1) break;
-      const texto = bodyHtml.slice(pStart + 3, pEnd).trim();
-      if (texto) cuerpo.push(texto);
-      pIndex = pEnd + 4;
-    }
-  }
-
+  // Cuerpo 
+  const parrafos = extraerCuerpoDesdeDiv(html);
+  // respuesta
+  const resumen = extraerResumen(html);
   return {
     titulo,
     resumen,
     imagen,
-    cuerpo
+    parrafos
   };
 }
+
+
+function extraerResumen(html) {
+  const marker = '<h2 class="subTitle text-2xl mb-5">';
+  const start = html.indexOf(marker);
+  if (start === -1) return "";
+
+  const open = html.indexOf(">", start) + 1;
+  const close = html.indexOf("</h2>", open);
+  if (close === -1) return "";
+
+  return html.slice(open, close).trim();
+}
+
+function extraerCuerpoDesdeDiv(html) {
+  const cuerpo = [];
+
+  // 1. Buscar el <div class="sc pl-3">
+  const divStart = html.indexOf('<div class="sc pl-3">');
+  if (divStart === -1) return cuerpo;
+
+  const divEnd = html.indexOf('</div>', divStart);
+  if (divEnd === -1) return cuerpo;
+
+  const divContenido = html.slice(divStart, divEnd);
+
+  // 2. Buscar todos los <p itemprop="description" class="sc__font-paragraph">
+  const regex = /<p[^>]*itemprop=["']description["'][^>]*>([\s\S]*?)<\/p>/g;
+  let match;
+
+  while ((match = regex.exec(divContenido)) !== null) {
+    let texto = match[1].trim();
+
+    // Eliminar etiquetas internas como <a>, <b>, etc.
+    texto = texto.replace(/<[^>]+>/g, "").trim();
+
+    if (texto) cuerpo.push(texto);
+  }
+
+  return cuerpo;
+}
+
+
 
 app.listen(port, () => {
   console.log(`📰 Servidor activo en http://localhost:${port}`);
