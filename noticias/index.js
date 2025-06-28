@@ -1,4 +1,4 @@
-import express from "express";
+import express, { text } from "express";
 import axios from "axios";
 
 const app = express();
@@ -95,21 +95,25 @@ function extraerCuerpoDesdeDiv(html) {
   // 1. Buscar el <div class="sc pl-3">
   const divStart = html.indexOf('<div class="sc pl-3">');
   if (divStart === -1) return cuerpo;
-
+  console.log(divStart);
+  
   const divEnd = html.indexOf('</div>', divStart);
   if (divEnd === -1) return cuerpo;
-
+  console.log(divEnd);
+  
   const divContenido = html.slice(divStart, divEnd);
-
-  // 2. Buscar todos los <p itemprop="description" class="sc__font-paragraph">
-  const regex = /<p[^>]*itemprop=["']description["'][^>]*>([\s\S]*?)<\/p>/g;
+  
+  
+  // Una expresión regex para filtrar el cuerpo de la noticia
+  const regex = /<p[^>]*itemprop=["']description["'][^>]*>([\s\S]*?)<\/p>/gi;
   let match;
 
   while ((match = regex.exec(divContenido)) !== null) {
     let texto = match[1].trim();
-
-    // Eliminar etiquetas internas como <a>, <b>, etc.
+    
+    // Limpiar etiquetas internas (como <a>, <b>, etc.)
     texto = texto.replace(/<[^>]+>/g, "").trim();
+    console.log(texto);
 
     if (texto) cuerpo.push(texto);
   }
