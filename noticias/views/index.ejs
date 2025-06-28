@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title><%= noticia.titulo %></title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1><%= noticia.titulo %></h1>
+    <h2 class="resumen"><%= noticia.resumen %></h2>
+    <img src="<%= noticia.imagen %>" alt="Imagen de la noticia" class="imagen">
+
+    <div class="cuerpo">
+      <% noticia.parrafos.forEach(p => { %>
+        <p><%= p %></p>
+      <% }); %>
+    </div>
+  </div>
+</body>
+</html>
