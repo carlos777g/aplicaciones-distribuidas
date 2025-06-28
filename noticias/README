@@ -1,0 +1,2 @@
+Página tipo web scrapping para obtener una noticia acerca de México de "el universal"
+Se debe usar esta ruta para ver la noticia, puedes usarla en el navegador o con postman: http://localhost:3002/noticia-principal
